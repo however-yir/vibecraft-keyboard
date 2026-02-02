@@ -47,3 +47,4 @@ This log materializes planned 2026Q1 commit cadence into concrete commits.
 - [GF-20260320-1] 2026-03-20 gap-fill :: keep interval <= 2 days
 - [GF-20260324-1] 2026-03-24 gap-fill :: keep interval <= 2 days
 - [GF-20260327-1] 2026-03-27 gap-fill :: keep interval <= 2 days
+- [GD-20260202] 2026-02-02 global-empty-day-fill :: daily contribution coverage
