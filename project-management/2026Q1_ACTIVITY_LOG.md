@@ -8,3 +8,4 @@ This log materializes planned 2026Q1 commit cadence into concrete commits.
 - [C04] 2026-01-16 初始化 :: chore(init): bootstrap baseline part 4
 - [C05] 2026-01-22 核心功能 :: feat(core): deliver core capability slice 5
 - [C06] 2026-01-28 核心功能 :: feat(core): deliver core capability slice 6
+- [C07] 2026-02-03 核心功能 :: feat(core): deliver core capability slice 7
