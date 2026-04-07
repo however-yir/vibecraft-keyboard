@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if ! command -v vibekeys >/dev/null 2>&1; then
-  echo "vibekeys command not found. Please install or build vibekeys_app first."
-  exit 1
-fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./lib.sh
+source "${SCRIPT_DIR}/lib.sh"
 
-vibekeys send $'PROMPTING LEVEL:\nLEVEL: CLAUDE'
+VIBEKEYS="$(resolve_vibekeys_bin)"
+DEMO_MESSAGE="${DEMO_MESSAGE:-$'PROMPT MODE:\nCLAUDE READY'}"
+
+run_cmd "${VIBEKEYS}" send "${DEMO_MESSAGE}"
 
 echo "Demo status sent."

@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/absolute/path/to/upstream/vibekeys_app/target/release/vibekeys hook"
+            "command": "bash /absolute/path/to/vibecraft-keyboard/scripts/vibecraft-hook.sh"
           }
         ]
       }
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/absolute/path/to/upstream/vibekeys_app/target/release/vibekeys hook"
+            "command": "bash /absolute/path/to/vibecraft-keyboard/scripts/vibecraft-hook.sh"
           }
         ]
       }
@@ -25,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/absolute/path/to/upstream/vibekeys_app/target/release/vibekeys hook"
+            "command": "bash /absolute/path/to/vibecraft-keyboard/scripts/vibecraft-hook.sh"
           }
         ]
       }
@@ -35,7 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/absolute/path/to/upstream/vibekeys_app/target/release/vibekeys hook"
+            "command": "bash /absolute/path/to/vibecraft-keyboard/scripts/vibecraft-hook.sh"
           }
         ]
       }
@@ -45,7 +45,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/absolute/path/to/upstream/vibekeys_app/target/release/vibekeys hook"
+            "command": "bash /absolute/path/to/vibecraft-keyboard/scripts/vibecraft-hook.sh"
           }
         ]
       }
@@ -55,7 +55,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/absolute/path/to/upstream/vibekeys_app/target/release/vibekeys hook"
+            "command": "bash /absolute/path/to/vibecraft-keyboard/scripts/vibecraft-hook.sh"
           }
         ]
       }
@@ -65,7 +65,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/absolute/path/to/upstream/vibekeys_app/target/release/vibekeys hook"
+            "command": "bash /absolute/path/to/vibecraft-keyboard/scripts/vibecraft-hook.sh"
           }
         ]
       }

@@ -29,8 +29,9 @@
 - [7. 快速开始](#7-快速开始)
 - [8. 文档索引](#8-文档索引)
 - [9. 开发路线](#9-开发路线)
-- [10. 注意事项](#10-注意事项)
-- [11. License](#11-license)
+- [10. 结构与尺寸说明](#10-结构与尺寸说明)
+- [11. 注意事项](#11-注意事项)
+- [12. License](#12-license)
 
 ---
 
@@ -149,23 +150,32 @@ flowchart LR
 ├── README.md
 ├── LICENSE
 ├── config
-│   └── claude-settings.example.json
+│   ├── claude-settings.example.json
+│   └── default-keymap.env.example
 ├── docs
 │   ├── assembly-roadmap.md
+│   ├── enclosure-layout-sketch.md
+│   ├── firmware-build-and-flash.md
 │   ├── hardware-bom.md
+│   ├── keymap-hook-profile.md
 │   ├── software-setup.md
 │   └── wiring-guide.md
 └── scripts
     ├── apply-default-keymap.sh
     ├── bootstrap-upstream.sh
-    └── send-demo-status.sh
+    ├── build-firmware.sh
+    ├── build-host-tools.sh
+    ├── flash-firmware.sh
+    ├── lib.sh
+    ├── send-demo-status.sh
+    └── vibecraft-hook.sh
 ```
 
 各目录职责如下：
 
 - `docs/`：项目说明、接线、搭建、软件配置与迭代路线
-- `config/`：配置模板
-- `scripts/`：拉取上游、发送显示文本、配置默认键位的辅助脚本
+- `config/`：Hook 配置模板与默认键位模板
+- `scripts/`：拉取上游、编译固件、烧录设备、发送显示文本和配置默认键位的辅助脚本
 
 ---
 
@@ -185,21 +195,43 @@ chmod +x scripts/bootstrap-upstream.sh
 ./scripts/bootstrap-upstream.sh
 ```
 
-### 7.3 阅读接线文档并完成样机连线
+### 7.3 编译上位机
+
+```bash
+chmod +x scripts/build-host-tools.sh
+./scripts/build-host-tools.sh
+```
+
+### 7.4 编译固件
+
+```bash
+chmod +x scripts/build-firmware.sh
+./scripts/build-firmware.sh keys
+```
+
+### 7.5 烧录固件
+
+```bash
+chmod +x scripts/flash-firmware.sh
+ESP_PORT=/dev/cu.usbmodem1101 ./scripts/flash-firmware.sh keys
+```
+
+### 7.6 阅读接线文档并完成样机连线
 
 优先阅读：
 
 - [接线指南](docs/wiring-guide.md)
 - [软件搭建说明](docs/software-setup.md)
+- [固件编译与烧录实操](docs/firmware-build-and-flash.md)
 
-### 7.4 配置默认键位
+### 7.7 配置默认键位
 
 ```bash
 chmod +x scripts/apply-default-keymap.sh
 ./scripts/apply-default-keymap.sh
 ```
 
-### 7.5 发送屏幕测试文本
+### 7.8 发送屏幕测试文本
 
 ```bash
 chmod +x scripts/send-demo-status.sh
@@ -213,6 +245,9 @@ chmod +x scripts/send-demo-status.sh
 - [硬件 BOM](docs/hardware-bom.md)
 - [接线指南](docs/wiring-guide.md)
 - [软件搭建说明](docs/software-setup.md)
+- [固件编译与烧录实操](docs/firmware-build-and-flash.md)
+- [键位命名与 Hook 文案](docs/keymap-hook-profile.md)
+- [外壳尺寸与布局草图](docs/enclosure-layout-sketch.md)
 - [装配与迭代路线](docs/assembly-roadmap.md)
 
 ---
@@ -239,15 +274,24 @@ chmod +x scripts/send-demo-status.sh
 
 ---
 
-## 10. 注意事项
+## 10. 结构与尺寸说明
+
+当前第二版文档已经把参考图进一步落到了结构层，包含：
+
+- 机身建议尺寸
+- 两排按键与旋钮的推荐坐标关系
+- 屏幕开窗和安装槽的建议尺寸
+- 适合首版 3D 打印外壳的厚度与斜面建议
+
+详见：[外壳尺寸与布局草图](docs/enclosure-layout-sketch.md)。
+
+## 11. 注意事项
 
 - 本项目当前定位为个人学习与 DIY 公开记录仓库。
 - 公共仓库内提供的是原创文档、脚本和整合方案，不直接分发第三方上游仓库源码。
 - 实际烧录和硬件装配前，请先完成电源、引脚、屏幕接口和按键防呆检查。
 - 如果后续加入电池、充电或便携外壳，请把安全设计放在第一优先级。
 
----
-
-## 11. License
+## 12. License
 
 本仓库内原创内容采用 `MIT License` 发布，详见 [LICENSE](LICENSE)。
