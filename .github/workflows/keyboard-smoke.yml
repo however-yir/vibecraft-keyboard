@@ -16,11 +16,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Shell syntax check
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
         run: |
-          for file in scripts/*.sh; do
-            bash -n "$file"
-          done
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Install shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+
+      - name: Shellcheck scripts
+        run: shellcheck scripts/*.sh
+
+      - name: Run pytest suite
+        run: pytest tests -q
 
       - name: Verify key docs exist
         run: |
