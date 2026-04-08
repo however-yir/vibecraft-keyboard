@@ -9,12 +9,19 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/however-yir/vibecraft-keyboard/actions/workflows/keyboard-smoke.yml"><img src="https://github.com/however-yir/vibecraft-keyboard/actions/workflows/keyboard-smoke.yml/badge.svg" alt="Keyboard Smoke" /></a>
   <img src="https://img.shields.io/badge/MCU-ESP32--S3-blue" alt="ESP32-S3" />
   <img src="https://img.shields.io/badge/Input-7%20Keys%20%2B%20Encoder-brightgreen" alt="Input" />
   <img src="https://img.shields.io/badge/Display-ST7789-orange" alt="ST7789" />
   <img src="https://img.shields.io/badge/Link-BLE%20HID-informational" alt="BLE HID" />
   <img src="https://img.shields.io/badge/Status-DIY%20Project-success" alt="DIY Project" />
 </p>
+
+> Status: `experiment`
+>
+> Role: hardware interface experiment for prompt control and physical developer workflow tooling
+>
+> Next priority: BOM refinement, wiring diagrams, real device photos, and firmware artifact publishing
 
 ---
 

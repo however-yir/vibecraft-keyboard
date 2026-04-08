@@ -1,0 +1,30 @@
+name: keyboard-smoke
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  repo-smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Shell syntax check
+        run: |
+          for file in scripts/*.sh; do
+            bash -n "$file"
+          done
+
+      - name: Verify key docs exist
+        run: |
+          test -f docs/hardware-bom.md
+          test -f docs/wiring-guide.md
+          test -f docs/firmware-build-and-flash.md
+          test -f config/default-keymap.env.example
