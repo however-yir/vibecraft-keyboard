@@ -257,6 +257,39 @@ chmod +x scripts/send-demo-status.sh
 - [外壳尺寸与布局草图](docs/enclosure-layout-sketch.md)
 - [装配与迭代路线](docs/assembly-roadmap.md)
 
+### 8.1 Bring-up 文档矩阵
+
+| 任务 | 文档入口 | 对应脚本 | 建议保留的证据 |
+|---|---|---|---|
+| 锁定采购清单 | `docs/hardware-bom.md` | 无 | 版本化 BOM 表或采购截图 |
+| 完成样机接线 | `docs/wiring-guide.md` | `scripts/send-demo-status.sh` | 屏幕点亮照片、按键扫描记录 |
+| 编译与烧录固件 | `docs/firmware-build-and-flash.md` | `scripts/build-firmware.sh` / `scripts/flash-firmware.sh` | `.bin` 产物与烧录日志 |
+| 配置默认键位 | `docs/keymap-hook-profile.md` | `scripts/apply-default-keymap.sh` | 默认键位截图或导出文件 |
+| 联通宿主工作流 | `docs/software-setup.md` | `scripts/vibecraft-hook.sh` | Hook 触发录屏或 GIF |
+| 打样结构件 | `docs/enclosure-layout-sketch.md` / `docs/assembly-roadmap.md` | 无 | 外壳渲染图或实物照片 |
+
+### 8.2 固件与演示产物建议
+
+为后续 GitHub Release 准备的最小产物建议如下：
+
+| 产物类型 | 建议命名 | 来源 | 用途 |
+|---|---|---|---|
+| 固件镜像 | `vibecraft-keys-<version>.bin` | `scripts/build-firmware.sh` | 设备烧录 |
+| 默认键位 | `default-keymap-<version>.env` | `config/default-keymap.env.example` | 快速恢复默认映射 |
+| 顶视图照片 | `showcase-top-view.jpg` | 样机拍摄 | README 首屏素材 |
+| 状态演示 GIF | `status-loop.gif` | Hook 联调录屏 | 展示屏幕与按键反馈 |
+| 接线图 PNG | `wiring-overview.png` | 文档导出 | 降低复现成本 |
+
+### 8.3 最小 Bring-up 验收
+
+一块可展示的 VibeCraft 样机，建议至少满足以下门槛：
+
+1. 长条屏可显示状态文本。
+2. 七个按键与旋钮事件均可被固件识别。
+3. 默认键位可通过配置模板恢复。
+4. 宿主机 Hook 能把状态消息发到设备。
+5. README 已挂出 BOM、接线、烧录与样机照片。
+
 ---
 
 ## 9. 开发路线
