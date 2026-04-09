@@ -303,6 +303,14 @@ chmod +x scripts/send-demo-status.sh
 1. `shellcheck scripts/*.sh`（若本机无 `shellcheck` 则回退到 `bash -n`）
 2. `pytest tests -q`
 
+如需把检查自动接入 Git 提交流程，可执行：
+
+```bash
+pip install pre-commit
+pre-commit install
+pre-commit run --all-files
+```
+
 ---
 
 ## 9. 开发路线

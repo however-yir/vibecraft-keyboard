@@ -21,7 +21,10 @@ trim_text() {
   printf '%s' "${value}" | cut -c1-28
 }
 
-EVENT="$(printf '%s' "${INPUT}" | jq -r '.hook_event_name // empty')"
+if ! EVENT="$(printf '%s' "${INPUT}" | jq -r '.hook_event_name // empty' 2>/dev/null)"; then
+  # Ignore malformed hook payloads so hook failures do not interrupt the user flow.
+  exit 0
+fi
 if [[ -z "${EVENT}" ]]; then
   exit 0
 fi

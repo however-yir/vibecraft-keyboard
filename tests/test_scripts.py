@@ -128,6 +128,44 @@ def test_flash_firmware_invalid_target_hits_usage_branch(tmp_path: Path) -> None
     assert "Usage:" in result.stdout
 
 
+def test_flash_firmware_dry_run_includes_port_and_monitor_flag_for_keys(tmp_path: Path) -> None:
+    sandbox = _create_sandbox(tmp_path)
+    (sandbox / "upstream" / "vibekeys_firmware").mkdir(parents=True)
+
+    result = _run_script(
+        sandbox,
+        "flash-firmware.sh",
+        "keys",
+        env={"DRY_RUN": "1", "ESP_PORT": "/dev/ttyUSB42", "MONITOR": "1"},
+    )
+
+    assert result.returncode == 0
+    assert "+ cargo build --bin vibekeys --release" in result.stdout
+    assert "--target-app-partition ota_1" in result.stdout
+    assert "--port /dev/ttyUSB42" in result.stdout
+    assert "--monitor" in result.stdout
+    assert "target/xtensa-esp32s3-espidf/release/vibekeys" in result.stdout
+
+
+def test_flash_firmware_dry_run_ota_without_monitor_flag(tmp_path: Path) -> None:
+    sandbox = _create_sandbox(tmp_path)
+    (sandbox / "upstream" / "vibekeys_firmware").mkdir(parents=True)
+
+    result = _run_script(
+        sandbox,
+        "flash-firmware.sh",
+        "ota",
+        env={"DRY_RUN": "1", "ESP_PORT": "/dev/ttyUSB77", "MONITOR": "0"},
+    )
+
+    assert result.returncode == 0
+    assert "+ cargo build --bin ota --release" in result.stdout
+    assert "--target-app-partition ota_0" in result.stdout
+    assert "--port /dev/ttyUSB77" in result.stdout
+    assert "--monitor" not in result.stdout
+    assert "target/xtensa-esp32s3-espidf/release/ota" in result.stdout
+
+
 def test_build_host_tools_missing_upstream_app_fails(tmp_path: Path) -> None:
     sandbox = _create_sandbox(tmp_path)
 
@@ -191,3 +229,19 @@ def test_vibecraft_hook_formats_pre_tool_use_event_in_dry_run(tmp_path: Path) ->
     assert result.returncode == 0
     assert "RUNNING TOOL:" in result.stdout
     assert f"+ {fake_vibekeys}" in result.stdout
+
+
+def test_vibecraft_hook_ignores_malformed_json_input(tmp_path: Path) -> None:
+    sandbox = _create_sandbox(tmp_path)
+    fake_vibekeys = sandbox / "bin" / "vibekeys"
+    _write_executable(fake_vibekeys, "#!/usr/bin/env bash\nexit 0\n")
+
+    result = _run_script(
+        sandbox,
+        "vibecraft-hook.sh",
+        env={"DRY_RUN": "1", "VIBEKEYS_BIN": str(fake_vibekeys)},
+        stdin="{not-json",
+    )
+
+    assert result.returncode == 0
+    assert result.stdout.strip() == ""
