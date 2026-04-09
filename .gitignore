@@ -4,3 +4,6 @@
 upstream/
 target/
 dist/
+output/
+__pycache__/
+.pytest_cache/

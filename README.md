@@ -290,6 +290,19 @@ chmod +x scripts/send-demo-status.sh
 4. 宿主机 Hook 能把状态消息发到设备。
 5. README 已挂出 BOM、接线、烧录与样机照片。
 
+### 8.4 本地质量检查
+
+提交前建议执行：
+
+```bash
+./scripts/check.sh
+```
+
+该命令会执行：
+
+1. `shellcheck scripts/*.sh`（若本机无 `shellcheck` 则回退到 `bash -n`）
+2. `pytest tests -q`
+
 ---
 
 ## 9. 开发路线
