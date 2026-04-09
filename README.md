@@ -54,6 +54,9 @@
 
 这个仓库采用“原创整合项目”的方式组织内容：公开仓库内提供的是项目文档、接线方案、配置模板与脚本骨架，不直接分发第三方上游仓库源码。这样更适合个人持续学习、迭代和公开记录。
 
+当前仓库定位为“文档/流程仓”，不是完整固件源码仓。  
+详细边界说明见：[仓库范围说明](docs/repo-scope.md)。
+
 ---
 
 ## 2. 目标效果与按键布局
@@ -200,6 +203,7 @@ cd vibecraft-keyboard
 ```bash
 chmod +x scripts/bootstrap-upstream.sh
 ./scripts/bootstrap-upstream.sh
+./scripts/check_firmware_sources.sh
 ```
 
 ### 7.3 编译上位机
